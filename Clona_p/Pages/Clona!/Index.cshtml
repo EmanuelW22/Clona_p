@@ -1,0 +1,80 @@
+﻿@page
+@model Clona_p.Pages.Clona.IndexModel
+@{
+}
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class=" alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<form method="POST">
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Titlu</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="titlu" value="@Model.infoPostare.titlu">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Autor</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="autor" value="@Model.infoPostare.autor">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Text</label>
+        <div class="col-sm-6">
+            <textarea type="text" class="form-control" name="textul" value="@Model.infoPostare.textul"></textarea>
+        </div>
+    </div>
+
+    @if (Model.successMessage.Length > 0)
+    {
+        <div class=" alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>@Model.successMessage</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class=" btn btn-primary">Submit</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a class=" btn btn-outline-primary" href="/" role="button">Cancel</a>
+        </div>
+    </div>
+</form>
+<br />
+@if (Model.ListaPostari != null)
+{
+    <div class="d-flex justify-content-center">
+        <table class="table" style="width: 60rem;">
+            <thead>
+                <tr>
+                    <th>Titlu</th>
+                    <th>Autor</th>
+                    <th>Text</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var postare in Model.ListaPostari)
+                {
+                    <tr>
+                        <td>@postare.titlu</td>
+                        <td>@postare.autor</td>
+                        <td>@postare.textul </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>Nu există date disponibile.</p>
+}
